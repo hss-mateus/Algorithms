@@ -44,14 +44,17 @@ Connect two elements in a disjoint set.
 If some element don't exist, the original set is returned.
 -}
 union :: Ord a => a -> a -> DisjointSet a -> DisjointSet a
-union a b xs =
-  case (root a xs, root b xs) of
-    (Just ra, Just rb) -> unionRoots ra rb xs
-    _ -> xs
+union a b xs
+  | a == b = xs
+  | otherwise =
+      case (root a xs, root b xs) of
+        (Just ra, Just rb) -> unionRoots ra rb xs
+        _ -> xs
 
 -- Given two roots, union them comparing their weights
 unionRoots :: Ord a => a -> a -> DisjointSet a -> DisjointSet a
 unionRoots ra rb (DisjointSet ps ws)
+  | ra == rb = DisjointSet ps ws
   | wa > wb = DisjointSet (updateRoot ra rb) (updateWeight ra)
   | otherwise = DisjointSet (updateRoot rb ra) (updateWeight rb)
   where wa = M.findWithDefault 1 ra ws
