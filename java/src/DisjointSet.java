@@ -5,7 +5,7 @@ public class DisjointSet<T> {
 
     private final Map<T, T> parent = new HashMap<>();
     private final Map<T, Integer> size = new HashMap<>();
-    public int count = 0;
+    private int count = 0;
 
     public void insert(T x) {
         if (parent.get(x) != null) return;
@@ -55,5 +55,9 @@ public class DisjointSet<T> {
         }
 
         count--;
+    }
+
+    public int count() {
+        return count;
     }
 }

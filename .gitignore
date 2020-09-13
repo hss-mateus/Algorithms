@@ -35,6 +35,7 @@ cabal.project.local~
 *.rar
 hs_err_pid*
 out/
+.attach*
 
 Main.java
 !algs4.jar
